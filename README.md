@@ -50,11 +50,15 @@ You will be creating a REST api service to store and read data from an H2 databa
 
 - [ ] The initial application contains the model for the users table. Endpoints are already created and the structure for auditing fields is in place. You are adding the model for the todos table and updating the services to work with the new table.
 
+- [ ] `Todos` will be saved through the `User` save method. You'll need to update the user save method to include the associated todos.
+
 - [ ] **TODOS**
+  - Class and Filename must be `Todos` (See SeedData)
   - `todoid` primary key, not null long
   - `description` string, not null
   - `completed` boolean. Note that for all new todos, default completed to false
   - `userid` foreign key (one user to many todos) not null
+  - Defer to SeedData.java on structure of non-default constructor
   - All tables must have the standard 4 auditing fields in place and working, being populated: created on, created by, last modified on, last modified by. The auditing usernames will all default to `llama`.
   - USERS have a one to many relationship with TODOS.
 
@@ -68,7 +72,7 @@ The following end points are already available in the initial application. You a
 
 - [ ] GET /users/user/{userid} - return the user and their todos based off of user id.
 
-- [ ] POST /users/user - adds a user with their todos
+- [ ] POST /users/user - adds a user **with their todos!** The user save method in the initial project must be updated to save associated `Todos`.
 
   You can use the following to test this!
 
@@ -87,8 +91,10 @@ The following end points are already available in the initial application. You a
       ]
   }
   ```
+  Ensure the new User contains all of the data supplied in the RequestBody.
 
 - [ ] PATCH /todos/todo/{todoid} - mark a todo as completed.
+  - Note that this method always sets the `completed` field to true. You should not allow users to set a todo's `completed` to false.
 
 - [ ] DELETE /users/user/{userid} - Deletes a user based off of their userid and deletes all their associated todos.
 
